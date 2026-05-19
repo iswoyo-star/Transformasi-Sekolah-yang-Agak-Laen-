@@ -63,15 +63,16 @@ export default function App() {
       });
 
       if (!response.ok) {
-        throw new Error("Failed to generate plan");
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.detail || errorData.error || "Failed to generate plan");
       }
 
       const resultData = await response.json();
       setResult(resultData.text || "Gagal menghasilkan rencana. Silakan coba lagi.");
       window.scrollTo({ top: 0, behavior: 'smooth' });
-    } catch (error) {
+    } catch (error: any) {
       console.error("Error generating plan:", error);
-      alert("Terjadi kesalahan saat menghubungi server. Silakan coba lagi.");
+      alert(`Terjadi kesalahan: ${error.message}`);
     } finally {
       setLoading(false);
     }

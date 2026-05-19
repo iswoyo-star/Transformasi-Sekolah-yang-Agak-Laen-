@@ -37,8 +37,8 @@ async function startServer() {
     }
 
     try {
-      // Using gemini-3-flash-preview (Free model per skill guidelines)
-      const model = "gemini-3-flash-preview";
+      // Using gemini-flash-latest for better general availability
+      const model = "gemini-flash-latest";
       
       const prompt = `
         Bertindaklah sebagai Ahli Strategi Transformasi Sekolah yang berpengalaman lebih dari 20 tahun. 
@@ -81,8 +81,13 @@ async function startServer() {
 
       res.json({ text: response.text });
     } catch (error: any) {
-      console.error("Gemini API Error:", error);
-      res.status(500).json({ error: "Gagal menghasilkan rencana. Silakan coba lagi nanti." });
+      console.error("Gemini API Error Detail:", error);
+      const errorMessage = error.message || "Gagal menghubungi AI";
+      res.status(500).json({ 
+        error: "Gagal menghasilkan rencana.", 
+        detail: errorMessage,
+        stack: process.env.NODE_ENV !== 'production' ? error.stack : undefined
+      });
     }
   });
 
