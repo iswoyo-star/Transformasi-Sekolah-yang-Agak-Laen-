@@ -128,190 +128,218 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-stone-50 selection:bg-emerald-100 selection:text-emerald-900">
+    <div className="min-h-screen bg-[#fafaf9] selection:bg-indigo-100 selection:text-indigo-900">
       {/* Header */}
-      <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-stone-200">
-        <div className="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-emerald-600 rounded-lg flex items-center justify-center text-white">
-              <School size={20} />
+      <header className="sticky top-0 z-50 bg-white/60 backdrop-blur-xl border-b border-indigo-50">
+        <div className="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 bg-indigo-500 rounded-2xl flex items-center justify-center text-white shadow-lg shadow-indigo-100 rotate-3">
+              <School size={24} />
             </div>
-            <h1 className="text-xl font-serif font-bold tracking-tight text-stone-900">
-              Transformasi <span className="text-emerald-600">Agak Laen</span>
-            </h1>
+            <div>
+              <h1 className="text-xl font-serif font-black tracking-tight text-slate-900 leading-none">
+                Transformasi <span className="text-indigo-500 italic block text-sm font-sans uppercase tracking-widest mt-0.5">Agak Laen</span>
+              </h1>
+            </div>
           </div>
           {result && (
             <button 
               onClick={() => setResult(null)}
-              className="text-sm font-medium text-stone-500 hover:text-stone-900 flex items-center gap-1 transition-colors"
+              className="px-4 py-2 bg-indigo-50 text-indigo-600 rounded-xl text-sm font-bold flex items-center gap-2 hover:bg-indigo-100 transition-all active:scale-95"
             >
-              <ArrowLeft size={16} />
-              Kembali ke Input
+              <ArrowLeft size={18} />
+              Re-edit Data
             </button>
           )}
         </div>
       </header>
 
-      <main className="max-w-5xl mx-auto px-4 py-12">
+      <main className="max-w-6xl mx-auto px-6 py-16">
         <AnimatePresence mode="wait">
           {!result ? (
             <motion.div 
               key="input-form"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              className="space-y-12"
+              exit={{ opacity: 0, scale: 0.95 }}
+              className="space-y-16"
             >
               {/* Hero Section */}
-              <div className="text-center space-y-4 max-w-2xl mx-auto">
-                <h2 className="text-4xl md:text-5xl font-serif font-bold text-stone-900 leading-tight">
-                  Ubah Sekolah Anda Menjadi <span className="italic text-emerald-600">Luar Biasa</span>
+              <div className="text-center space-y-6 max-w-3xl mx-auto">
+                <div className="inline-flex items-center gap-2 px-4 py-2 bg-amber-50 text-amber-700 rounded-full text-xs font-black uppercase tracking-widest border border-amber-100">
+                  <Sparkles size={14} className="fill-amber-700" />
+                  AI Transformation Expert
+                </div>
+                <h2 className="text-5xl md:text-6xl font-serif font-black text-slate-900 leading-[1.1]">
+                  Rancang Strategi <span className="text-indigo-500 underline decoration-indigo-200 underline-offset-8">Sekolah Impian</span>
                 </h2>
-                <p className="text-lg text-stone-600">
-                  Masukkan data evaluasi sekolah Anda, dan biarkan AI Strategis kami menyusun rencana kerja taktis yang siap dijalankan.
+                <p className="text-xl text-slate-500 font-medium">
+                  Ubah data SWOT menjadi rencana taktis yang "Agak Laen" dan visioner hanya dalam hitungan detik.
                 </p>
               </div>
 
               {/* Form Grid */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <InputCard 
-                  title="Kekuatan (Strengths)"
-                  description="Apa hal baik yang sudah dimiliki sekolah saat ini?"
-                  name="strengths"
-                  value={data.strengths}
-                  onChange={handleInputChange}
-                  icon={<Zap className="text-amber-500" size={20} />}
-                  placeholder="Contoh: Guru-guru muda yang kreatif, fasilitas lab komputer lengkap, dukungan orang tua kuat..."
-                />
-                <InputCard 
-                  title="Kelemahan (Weaknesses)"
-                  description="Apa kekurangan atau masalah internal yang paling terasa?"
-                  name="weaknesses"
-                  value={data.weaknesses}
-                  onChange={handleInputChange}
-                  icon={<AlertTriangle className="text-rose-500" size={20} />}
-                  placeholder="Contoh: Kurangnya pelatihan kurikulum baru, administrasi masih manual, motivasi belajar siswa rendah..."
-                />
-                <InputCard 
-                  title="Peluang (Opportunities)"
-                  description="Kesempatan apa di luar sekolah yang bisa dimanfaatkan?"
-                  name="opportunities"
-                  value={data.opportunities}
-                  onChange={handleInputChange}
-                  icon={<TrendingUp className="text-emerald-500" size={20} />}
-                  placeholder="Contoh: Kerjasama dengan industri lokal, beasiswa dari pemerintah, tren digitalisasi pendidikan..."
-                />
-                <InputCard 
-                  title="Ancaman (Threats)"
-                  description="Tantangan luar yang bisa menghambat kemajuan?"
-                  name="threats"
-                  value={data.threats}
-                  onChange={handleInputChange}
-                  icon={<Target className="text-blue-500" size={20} />}
-                  placeholder="Contoh: Munculnya sekolah pesaing baru, perubahan kebijakan mendadak, lingkungan sekitar yang kurang kondusif..."
-                />
-                <div className="md:col-span-2">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div className="lg:col-span-2">
+                  <InputCard 
+                    title="Kekuatan"
+                    description="Internal Strength"
+                    name="strengths"
+                    value={data.strengths}
+                    onChange={handleInputChange}
+                    icon={<Zap className="text-amber-600" size={24} fill="currentColor" />}
+                    placeholder="Apa hal keren yang ada di sekolah Anda?"
+                    bgColor="bg-[#fff9e6]"
+                    accentColor="border-amber-200"
+                    textColor="text-amber-900"
+                  />
+                </div>
+                <div className="lg:col-span-2">
+                  <InputCard 
+                    title="Kelemahan"
+                    description="Internal Challenges"
+                    name="weaknesses"
+                    value={data.weaknesses}
+                    onChange={handleInputChange}
+                    icon={<AlertTriangle className="text-rose-600" size={24} fill="currentColor" />}
+                    placeholder="Jujur saja, apa yang kurang oke di dalam?"
+                    bgColor="bg-[#fff1f2]"
+                    accentColor="border-rose-200"
+                    textColor="text-rose-900"
+                  />
+                </div>
+                <div className="lg:col-span-2">
+                  <InputCard 
+                    title="Peluang"
+                    description="External Potential"
+                    name="opportunities"
+                    value={data.opportunities}
+                    onChange={handleInputChange}
+                    icon={<TrendingUp className="text-emerald-600" size={24} />}
+                    placeholder="Keajaiban apa yang menunggu di luar sana?"
+                    bgColor="bg-[#f0fdf4]"
+                    accentColor="border-emerald-200"
+                    textColor="text-emerald-900"
+                  />
+                </div>
+                <div className="lg:col-span-2">
+                  <InputCard 
+                    title="Ancaman"
+                    description="External Risks"
+                    name="threats"
+                    value={data.threats}
+                    onChange={handleInputChange}
+                    icon={<Target className="text-blue-600" size={24} />}
+                    placeholder="Apa yang bikin kita deg-degan dari luar?"
+                    bgColor="bg-[#eff6ff]"
+                    accentColor="border-blue-200"
+                    textColor="text-blue-900"
+                  />
+                </div>
+                <div className="lg:col-span-4">
                   <InputCard 
                     title="Harapan Masa Depan (3 Tahun)"
-                    description="Kondisi sekolah seperti apa yang ingin dicapai dalam 3 tahun ke depan?"
+                    description="Visionary Hopes"
                     name="futureHopes"
                     value={data.futureHopes}
                     onChange={handleInputChange}
-                    icon={<Sparkles className="text-purple-500" size={20} />}
-                    placeholder="Contoh: Menjadi sekolah rujukan digital di tingkat provinsi, 90% lulusan diterima di PTN favorit, budaya literasi yang kuat..."
+                    icon={<Sparkles className="text-purple-600" size={24} fill="currentColor" />}
+                    placeholder="Tutup mata sejenak, bayangkan sekolah 3 tahun lagi. Seperti apa megahnya?"
+                    bgColor="bg-[#f5f3ff]"
+                    accentColor="border-purple-200"
+                    textColor="text-purple-900"
                     large
                   />
                 </div>
               </div>
 
               {/* Action Buttons */}
-              <div className="flex flex-col md:flex-row items-center justify-center gap-4 pt-8">
+              <div className="flex flex-col items-center gap-8 pt-4">
                 <button
                   onClick={generateTransformationPlan}
                   disabled={loading}
-                  className="w-full md:w-auto px-8 py-4 bg-stone-900 text-white rounded-full font-semibold text-lg flex items-center justify-center gap-2 hover:bg-stone-800 transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-stone-200"
+                  className="group relative w-full md:w-auto px-12 py-6 bg-slate-900 text-white rounded-[2rem] font-black text-xl flex items-center justify-center gap-3 hover:bg-indigo-600 transition-all shadow-2xl shadow-indigo-200 hover:-translate-y-1 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {loading ? (
                     <>
-                      <Loader2 className="animate-spin" size={20} />
-                      Menyusun Strategi...
+                      <Loader2 className="animate-spin" size={24} />
+                      Synthesizing Strategy...
                     </>
                   ) : (
                     <>
-                      Generate Strategi Transformasi
-                      <ChevronRight size={20} />
+                      Buka Gerbang Transformasi
+                      <ChevronRight size={24} className="group-hover:translate-x-1 transition-transform" />
                     </>
                   )}
                 </button>
                 <button
                   onClick={resetForm}
-                  className="text-stone-500 hover:text-stone-900 font-medium transition-colors"
+                  className="text-slate-400 hover:text-rose-500 font-bold text-sm uppercase tracking-widest transition-colors flex items-center gap-2"
                 >
-                  Reset Data
+                  <AlertTriangle size={16} />
+                  Mulai dari Nol
                 </button>
               </div>
             </motion.div>
           ) : (
             <motion.div 
               key="result-view"
-              initial={{ opacity: 0, scale: 0.98 }}
-              animate={{ opacity: 1, scale: 1 }}
-              className="space-y-8"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="space-y-12"
             >
               {/* Result Header */}
-              <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-stone-200 pb-8">
-                <div className="space-y-2">
-                  <div className="inline-flex items-center gap-2 px-3 py-1 bg-emerald-100 text-emerald-700 rounded-full text-xs font-bold uppercase tracking-wider">
-                    <Sparkles size={14} />
-                    Strategi Siap Dijalankan
-                  </div>
-                  <h2 className="text-4xl font-serif font-bold text-stone-900">
-                    Panduan Transformasi Sekolah
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-end border-b border-slate-200 pb-12">
+                <div className="md:col-span-2 space-y-4">
+                  <div className="w-16 h-1 bg-indigo-500 rounded-full" />
+                  <h2 className="text-5xl font-serif font-black text-slate-900 leading-tight">
+                    Blueprint <br/>Transformasi <span className="text-indigo-500">'Agak Laen'</span>
                   </h2>
-                  <p className="text-stone-500">
-                    Dibuat berdasarkan analisis SWOT dan visi masa depan sekolah Anda.
+                  <p className="text-slate-500 text-lg font-medium">
+                    Analisis mendalam untuk lompatan kuantum sekolah Anda.
                   </p>
                 </div>
-                <div className="flex items-center gap-3">
+                <div className="flex justify-start md:justify-end gap-3">
                   <button 
                     onClick={copyToClipboard}
-                    className="flex items-center gap-2 px-4 py-2 bg-white border border-stone-200 rounded-lg text-sm font-medium text-stone-700 hover:bg-stone-50 transition-colors shadow-sm"
+                    className="flex-1 md:flex-none flex items-center justify-center gap-2 px-6 py-4 bg-white border-2 border-slate-100 rounded-2xl text-sm font-black text-slate-700 hover:bg-slate-50 hover:border-indigo-100 transition-all shadow-sm active:scale-95"
                   >
-                    {copied ? <CheckCircle2 size={18} className="text-emerald-500" /> : <Copy size={18} />}
-                    {copied ? 'Tersalin!' : 'Salin Semua'}
+                    {copied ? <CheckCircle2 size={20} className="text-emerald-500" /> : <Copy size={20} />}
+                    {copied ? 'Copied!' : 'Copy Plan'}
                   </button>
                 </div>
               </div>
 
               {/* Result Content */}
               <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-                <div className="lg:col-span-8 space-y-12">
-                  <div ref={resultRef} className="markdown-body bg-white p-8 md:p-12 rounded-3xl border border-stone-200 shadow-sm">
+                <div className="lg:col-span-8">
+                  <div ref={resultRef} className="markdown-body bg-white p-10 md:p-14 rounded-[3rem] border border-slate-100 shadow-xl shadow-slate-100/50">
                     <ReactMarkdown>{result}</ReactMarkdown>
                   </div>
                 </div>
 
-                {/* Sidebar / Quick Access */}
-                <div className="lg:col-span-4 space-y-6">
-                  <div className="sticky top-24 space-y-6">
-                    <div className="bg-stone-900 text-white p-6 rounded-2xl space-y-4">
-                      <h3 className="text-xl font-serif font-bold">Langkah Selanjutnya?</h3>
-                      <p className="text-stone-400 text-sm leading-relaxed">
-                        Gunakan panduan ini untuk rapat koordinasi dengan guru atau presentasi ke pemangku kepentingan.
+                {/* Sidebar */}
+                <div className="lg:col-span-4 space-y-8">
+                  <div className="sticky top-28 space-y-8">
+                    <div className="bg-indigo-600 text-white p-8 rounded-[2.5rem] space-y-6 shadow-2xl shadow-indigo-200 relative overflow-hidden">
+                      <Zap size={120} className="absolute -bottom-10 -right-10 text-white/10 rotate-12" />
+                      <h3 className="text-2xl font-serif font-black relative z-10">Waktunya Beraksi!</h3>
+                      <p className="text-indigo-100 font-medium relative z-10">
+                        Strategi ini tidak akan 'laen' kalau hanya disimpan. Bagikan sekarang!
                       </p>
-                      <div className="space-y-3 pt-2">
-                        <ActionButton icon={<FileText size={18} />} label="Cetak Dokumen" onClick={() => window.print()} />
-                        <ActionButton icon={<Presentation size={18} />} label="Buka Mode Presentasi" onClick={() => alert("Gunakan bagian 'Bahan Presentasi' di bawah untuk paparan Anda.")} />
+                      <div className="space-y-3 relative z-10">
+                        <ActionButton icon={<FileText size={20} />} label="Print Blueprint" onClick={() => window.print()} secondary />
+                        <ActionButton icon={<Presentation size={20} />} label="Slide Paparan" onClick={() => alert("Lihat bagian akhir dokumen untuk bahan presentasi.")} secondary />
                       </div>
                     </div>
 
-                    <div className="bg-emerald-50 border border-emerald-100 p-6 rounded-2xl space-y-3">
-                      <h4 className="font-bold text-emerald-900 flex items-center gap-2">
-                        <Zap size={18} />
-                        Tips Ahli
-                      </h4>
-                      <p className="text-emerald-800 text-sm leading-relaxed">
-                        Fokuslah pada <strong>Quick Wins</strong> di 2 bulan pertama untuk membangun kepercayaan diri tim sebelum masuk ke program yang lebih kompleks.
+                    <div className="bg-amber-50 border border-amber-100 p-8 rounded-[2.5rem] space-y-4">
+                      <div className="w-12 h-12 bg-amber-200/50 rounded-2xl flex items-center justify-center text-amber-700">
+                        <Zap size={24} fill="currentColor" />
+                      </div>
+                      <h4 className="text-xl font-serif font-black text-amber-900">Expert Tip</h4>
+                      <p className="text-amber-800 font-medium leading-relaxed">
+                        Jangan ubah semuanya sekaligus. Pilih <strong>satu</strong> program 'Agak Laen' paling berani untuk bulan pertama!
                       </p>
                     </div>
                   </div>
@@ -323,15 +351,17 @@ export default function App() {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-stone-200 py-12 mt-12 bg-white">
-        <div className="max-w-5xl mx-auto px-4 text-center space-y-4">
-          <div className="flex items-center justify-center gap-2 opacity-50">
-            <School size={16} />
-            <span className="text-sm font-medium uppercase tracking-widest">Transformasi Sekolah Agak Laen</span>
+      <footer className="py-20 bg-white border-t border-slate-50">
+        <div className="max-w-6xl mx-auto px-6 flex flex-col items-center gap-8">
+          <div className="flex items-center gap-2 opacity-30 grayscale">
+            <School size={24} />
+            <h1 className="text-lg font-serif font-black tracking-tight">Transformasi Sekolah</h1>
           </div>
-          <p className="text-stone-400 text-sm">
-            &copy; {new Date().getFullYear()} &bull; Dirancang untuk kemajuan pendidikan Indonesia.
-          </p>
+          <div className="flex gap-8 text-sm font-black text-slate-300 uppercase tracking-[0.2em]">
+            <span>Empowered by AI</span>
+            <span>&bull;</span>
+            <span>Est. 2026</span>
+          </div>
         </div>
       </footer>
     </div>
@@ -346,6 +376,9 @@ function InputCard({
   onChange, 
   icon, 
   placeholder,
+  bgColor,
+  accentColor,
+  textColor,
   large = false
 }: { 
   title: string; 
@@ -355,17 +388,20 @@ function InputCard({
   onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void; 
   icon: React.ReactNode;
   placeholder: string;
+  bgColor: string;
+  accentColor: string;
+  textColor: string;
   large?: boolean;
 }) {
   return (
-    <div className={`bg-white p-6 rounded-2xl border border-stone-200 shadow-sm hover:border-stone-300 transition-all group ${large ? 'md:p-8' : ''}`}>
-      <div className="flex items-start gap-4 mb-4">
-        <div className="p-2 bg-stone-50 rounded-lg group-hover:bg-white group-hover:shadow-sm transition-all">
+    <div className={`flex flex-col h-full bg-white p-6 rounded-[2rem] border-2 border-slate-50 transition-all hover:border-indigo-100 hover:shadow-xl hover:shadow-indigo-50/50 group ${large ? 'md:p-10' : ''}`}>
+      <div className={`flex items-center gap-4 mb-6 p-4 rounded-2xl ${bgColor} border ${accentColor}`}>
+        <div className="transition-transform group-hover:scale-110 duration-500">
           {icon}
         </div>
         <div>
-          <h3 className="font-bold text-stone-900">{title}</h3>
-          <p className="text-xs text-stone-500">{description}</p>
+          <h3 className={`font-black text-lg ${textColor} leading-none`}>{title}</h3>
+          <p className="text-[10px] font-black uppercase tracking-widest text-slate-400 mt-1">{description}</p>
         </div>
       </div>
       <textarea
@@ -373,17 +409,17 @@ function InputCard({
         value={value}
         onChange={onChange}
         placeholder={placeholder}
-        className={`w-full bg-stone-50 border border-stone-100 rounded-xl p-4 text-stone-800 placeholder:text-stone-300 focus:outline-none focus:ring-2 focus:ring-emerald-500/20 focus:border-emerald-500 transition-all resize-none ${large ? 'h-48' : 'h-32'}`}
+        className={`flex-1 w-full bg-slate-50/50 border border-slate-100 rounded-2xl p-5 text-slate-700 placeholder:text-slate-300 focus:outline-none focus:ring-4 focus:ring-indigo-50 focus:bg-white focus:border-indigo-200 transition-all resize-none font-medium leading-relaxed ${large ? 'h-64' : 'h-40'}`}
       />
     </div>
   );
 }
 
-function ActionButton({ icon, label, onClick }: { icon: React.ReactNode; label: string; onClick: () => void }) {
+function ActionButton({ icon, label, onClick, secondary }: { icon: React.ReactNode; label: string; onClick: () => void, secondary?: boolean }) {
   return (
     <button 
       onClick={onClick}
-      className="w-full flex items-center gap-3 px-4 py-3 bg-white/10 hover:bg-white/20 rounded-xl text-sm font-medium transition-colors text-left"
+      className={`w-full flex items-center gap-3 px-6 py-4 rounded-2xl text-sm font-black transition-all active:scale-95 shadow-sm ${secondary ? 'bg-white/10 hover:bg-white/20 text-white' : 'bg-white text-indigo-600 hover:bg-indigo-50'}`}
     >
       {icon}
       {label}
