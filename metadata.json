@@ -1,5 +1,8 @@
 {
   "name": "Transformasi Sekolah 'Agak Laen'",
   "description": "Aplikasi strategi transformasi sekolah berbasis AI untuk menyusun rencana kerja taktis dan visioner.",
-  "requestFramePermissions": []
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
 }

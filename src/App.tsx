@@ -1,10 +1,4 @@
-/**
- * @license
- * SPDX-License-Identifier: Apache-2.0
- */
-
 import React, { useState, useRef } from 'react';
-import { GoogleGenAI } from "@google/genai";
 import ReactMarkdown from 'react-markdown';
 import { 
   School, 
@@ -60,53 +54,24 @@ export default function App() {
 
     setLoading(true);
     try {
-      const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
-      const model = "gemini-3.1-pro-preview";
-      
-      const prompt = `
-        Bertindaklah sebagai Ahli Strategi Transformasi Sekolah yang berpengalaman lebih dari 20 tahun. 
-        Tugasmu adalah memproses 5 Data Kunci berikut untuk menghasilkan "Panduan Transformasi Sekolah yang 'Agak Laen'".
-        
-        DATA KUNCI:
-        1. Kekuatan: ${data.strengths}
-        2. Kelemahan: ${data.weaknesses}
-        3. Peluang: ${data.opportunities}
-        4. Ancaman: ${data.threats}
-        5. Harapan Masa Depan (3 Tahun): ${data.futureHopes}
-        
-        FORMAT JAWABAN (WAJIB):
-        
-        1. Potret Kondisi Sekolah (Analisis Situasi): 
-           Ringkasan kondisi sekolah berdasarkan SWOT dan Harapan Masa Depan dengan bahasa yang memotivasi dan menggugah semangat.
-        
-        2. Program Perubahan (Panduan Pelaksanaan):
-           Usulan program konkret yang memuat:
-           a. Persiapan: SDM, biaya, alat/bahan.
-           b. Langkah Demi Langkah: Urutan tindakan nyata (Minggu ke-1, ke-2, dst).
-           c. Cara Menghadapi Hambatan: Tips praktis mengatasi kelemahan/ancaman.
-           d. Indikator Keberhasilan: Bukti nyata perubahan.
-        
-        3. Alur Waktu Perubahan:
-           a. Langkah Cepat (1-2 Bulan): Program sederhana memanfaatkan Kekuatan untuk hasil cepat (Quick Wins).
-           b. Langkah Lanjutan: Program strategis menutupi Kelemahan dan mencapai Harapan Masa Depan.
-        
-        4. Bahan Presentasi: 
-           Ringkasan poin-poin penting (bullet points) yang siap disalin untuk paparan ke Yayasan atau Dinas Pendidikan.
-        
-        TONE: Profesional, akrab, solutif, dan mendukung. Gunakan istilah bahasa Indonesia yang mudah dipahami.
-        BATASAN: Taktis, sesuai data, singkat dan padat.
-      `;
-
-      const response = await ai.models.generateContent({
-        model: model,
-        contents: [{ role: 'user', parts: [{ text: prompt }] }],
+      const response = await fetch("/api/generate-plan", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
       });
 
-      setResult(response.text || "Gagal menghasilkan rencana. Silakan coba lagi.");
+      if (!response.ok) {
+        throw new Error("Failed to generate plan");
+      }
+
+      const resultData = await response.json();
+      setResult(resultData.text || "Gagal menghasilkan rencana. Silakan coba lagi.");
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } catch (error) {
       console.error("Error generating plan:", error);
-      alert("Terjadi kesalahan saat menghubungi AI. Pastikan koneksi internet stabil.");
+      alert("Terjadi kesalahan saat menghubungi server. Silakan coba lagi.");
     } finally {
       setLoading(false);
     }
